@@ -24,7 +24,6 @@ var accentsTidy = function(s){
 };
 
 app.get('/negocio/sms', function(req, res, next) {
-  console.log(req.query);
   var data = req.query;
   var fromNum = data.From;
   var message = 'Hola! ';
