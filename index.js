@@ -31,21 +31,19 @@ app.get('/negocio/sms', function(req, res, next) {
   message += 'Tu eres ' + randomPct + '% Boricua.  Visita mas negocios locales para probar cuan Boricua eres.'
 
   // Return Message.
-  var client = new twilio.RestClient(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  client.sendSms({
+  var resp = new twilio.TwimlResponse();
+
+  resp.message({
     to: fromNum,
     from: process.env.TWILIO_NUMBER,
-    body: message
-  }, function(error, message) {
-       if (!error) {
-         console.log("Message Sent.");
-       }
-       else {
-         console.log(error);
-         console.log('Error');
-       }
-       res.end('Success');
-     });
+  }, message
+  );
+
+  res.writeHead(200, {
+    'Content-Type':'text/xml'
+  });
+  res.end(resp.toString());
+
 });
 
 app.listen(app.get('port'), function() {
