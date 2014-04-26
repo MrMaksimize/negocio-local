@@ -32,7 +32,7 @@ app.get('/negocio/sms', function(req, res, next) {
 
   // Return Message.
   var client = new twilio.RestClient(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  client.sms.messages.create({
+  client.sendSms({
     to: fromNum,
     from: process.env.TWILIO_NUMBER,
     body: message
@@ -41,6 +41,7 @@ app.get('/negocio/sms', function(req, res, next) {
          console.log("Message Sent.");
        }
        else {
+	 console.log(error);
          console.log('Error');
        }
        res.end('Success');
