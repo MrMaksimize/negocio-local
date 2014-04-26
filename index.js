@@ -11,15 +11,28 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 });
 
+var accentsTidy = function(s){
+  var r = s.toLowerCase();
+  r = r.replace(new RegExp(/\s/g),"");
+  r = r.replace(new RegExp(/[á]/g),"a");
+  r = r.replace(new RegExp(/[é]/g),"e");
+  r = r.replace(new RegExp(/[í]/g),"i");
+  r = r.replace(new RegExp(/ñ/g),"n");
+  r = r.replace(new RegExp(/[ó]/g),"o");
+  r = r.replace(new RegExp(/[úü]/g),"u");
+  return r;
+};
+
 app.get('/negocio/sms', function(req, res, next) {
   console.log(req.query);
   var data = req.query;
   var fromNum = data.From;
   var message = 'Hola! ';
-  if (data.Body.toLowerCase() == 'hsp') {
+  var incomingText = accentsTidy(data.Body);
+  if (incomingText == 'hsp') {
     message += 'La historia del café hacienda San Pedro se remonta a los finales del siglo XIX cuando llega a nuestras orillas un joven español de 13 años con una sola maleta y sus sueños. ';
   }
-  else if (data.Body.toLowerCase() == 'meson') {
+  else if (incomingText == 'meson') {
     message += 'La historia de El Meson Sandwiches comenzó en 1972 en nuestro primer establecimiento en Aguadilla. Somos la primera cadena de comida rápida netamente puertorriqueña, lo que nos llena de sumo orgullo y nos impulsa a continuar elevando los estándares de calidad en el producto y servicio a usted, nuestro invitado. ';
   }
   else {
@@ -36,8 +49,7 @@ app.get('/negocio/sms', function(req, res, next) {
   resp.message({
     to: fromNum,
     from: process.env.TWILIO_NUMBER,
-  }, message
-  );
+  }, message);
 
   res.writeHead(200, {
     'Content-Type':'text/xml'
