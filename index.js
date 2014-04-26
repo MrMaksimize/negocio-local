@@ -40,7 +40,7 @@ app.get('/negocio/sms', function(req, res, next) {
 
   // TODO -- make percentage random.
   var randomPct = Math.floor((Math.random()*100)+1);
-  message += 'Tu eres ' + randomPct + '% Boricua.  Visita mas negocios locales para probar cuan Boricua eres.'
+  message += " \n Tu eres ' + randomPct + '% Boricua.  Visita mas negocios locales para probar cuan Boricua eres.";
 
   // Return Message.
   var resp = new twilio.TwimlResponse();
