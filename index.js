@@ -35,7 +35,7 @@ app.get('/negocio/sms', function(req, res, next) {
     message += 'La historia de El Meson Sandwiches comenzó en 1972 en nuestro primer establecimiento en Aguadilla. Somos la primera cadena de comida rápida netamente puertorriqueña, lo que nos llena de sumo orgullo y nos impulsa a continuar elevando los estándares de calidad en el producto y servicio a usted, nuestro invitado. ';
   }
   else {
-     message += 'Try something else. ';
+     message += '';
   }
 
   var randomPct = Math.floor((Math.random()*100)+1);
