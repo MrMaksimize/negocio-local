@@ -7,16 +7,9 @@ html
     meta(name='description', content='')
     meta(name='csrf-token', content=_csrf)
     meta(name='author', content='')
-    title #{title} | Hackathon Votr
+    title #{title} | Negocio Local
     != css('styles')
     != js('application')
-    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
-    script(type='text/javascript').
-      // Data dump.
-      // TODO -- how to put NOT put stuff here when not relevant?
-      var appData = {};
-      appData.voteOptions = !{JSON.stringify(eventObject.votingOptions)};
-      appData.voteResults = !{JSON.stringify(voteResults)};
   body
     #wrap
       include partials/navigation

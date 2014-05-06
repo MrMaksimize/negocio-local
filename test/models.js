@@ -1,8 +1,8 @@
 var chai = require('chai');
 var should = chai.should();
 var User = require('../models/User');
-var Event = require('../models/Event');
-var Vote = require('../models/Vote');
+var Business = require('../models/SMS');
+var SMS = require('../models/SMS');
 var mocks = require('../helpers/mocks');
 
 describe('Event Model', function() {

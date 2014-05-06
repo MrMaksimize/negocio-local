@@ -14,7 +14,6 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
-var socketio = require('socket.io')
 
 var MongoStore = require('connect-mongo')({ session: session });
 var flash = require('express-flash');
@@ -35,7 +34,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-var eventController = require('./controllers/event');
+var bizController = require('./controllers/business');
 
 /**
  * API keys + Passport configuration.
@@ -68,7 +67,7 @@ var day = hour * 24;
 var week = day * 7;
 
 var csrfWhitelist = [
-  '/votes/sms'
+  '/sms/receive'
 ];
 
 app.set('port', process.env.PORT || 3000);
@@ -122,8 +121,8 @@ app.use(function(req, res, next) {
  */
 // TODO http://scotch.io/bar-talk/expressjs-4-0-new-features-and-upgrading-from-3-0
 app.get('/', homeController.index);
-app.get('/events', eventController.routes.index);
-app.get('/events/:eventshort', eventController.routes.getEvent);
+app.get('/businesses', bizController.routes.index);
+app.get('/businesses/:bizshort', bizController.routes.getBiz);
 
 // Stock
 app.get('/login', userController.getLogin);
@@ -208,7 +207,7 @@ var server = app.listen(app.get('port'), function() {
 });
 
 // Clean up this bullshit @TODO
-require('./controllers/vote')(app);
+require('./controllers/sms')(app);
 
 /**
  * 500 Error Handler.

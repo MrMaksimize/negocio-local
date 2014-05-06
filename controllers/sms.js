@@ -1,15 +1,15 @@
 var twiliosig = require('twiliosig');
 
-var Event = require('../models/Event');
-var Vote = require('../models/Vote');
+var Business = require('../models/Business');
+var SMS = require('../models/SMS');
 
 module.exports = function(app) {
   console.log('Exports');
-  app.post('/votes/sms', createVote);
+  app.post('/sms/receive', receiveSMS);
 }
 
 
-var createVote = function(req, res, next) {
+var receiveSMS = function(req, res, next) {
   // If we have an error, explode.
   // Check sig should be off in development.
   if (process.env.NODE_ENV == 'production' && !twiliosig.valid(req, process.env.TWILIO_ACCOUNT_SID)) {
