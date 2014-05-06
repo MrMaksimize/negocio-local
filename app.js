@@ -207,25 +207,8 @@ var server = app.listen(app.get('port'), function() {
   console.log("✔ Express server listening on port %d in %s mode", app.get('port'), app.get('env'));
 });
 
-/**
- * Socket IO
- */
-
-var io = socketio.listen(server);
-
-io.configure('development', function(){
-  io.set('log level', 1);
-});
-
-io.sockets.on('connection', function(socket) {
-  console.log('Connection Made');
-  socket.on('event', function(event) {
-    socket.join(event);
-  });
-});
-
 // Clean up this bullshit @TODO
-require('./controllers/vote')(app, io);
+require('./controllers/vote')(app);
 
 /**
  * 500 Error Handler.

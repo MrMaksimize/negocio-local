@@ -2,11 +2,9 @@ var twiliosig = require('twiliosig');
 
 var Event = require('../models/Event');
 var Vote = require('../models/Vote');
-var io = {};
 
-module.exports = function(app, socketio) {
+module.exports = function(app) {
   console.log('Exports');
-  io = socketio;
   app.post('/votes/sms', createVote);
 }
 

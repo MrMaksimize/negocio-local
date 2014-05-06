@@ -1,6 +1,6 @@
 module.exports = {
 
-  db: process.env.MONGODB|| 'mongodb://localhost:27017/hack-votr',
+  db: process.env.MONGODB|| 'mongodb://localhost:27017/negocio-local',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
