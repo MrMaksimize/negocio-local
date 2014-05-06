@@ -8,11 +8,10 @@ function getUniqueStringOrNum(base) {
   return string.substring(0, 12);
 }
 
-mocks.votes = {
+mocks.sms = {
   simple: {
-    voterPhoneNumber: '+17736777755',
-    eventPhoneNumber: '+19164263342',
-    voteBody: 'Yes',
+    senderPhoneNumber: '+17736777755',
+    body: 'business_one',
   },
   unique: {
     voterPhoneNumber: getUniqueStringOrNum(),
@@ -31,32 +30,16 @@ mocks.votes = {
   }
 };
 
-mocks.events = {
+mocks.businesses= {
   simple: {
-    name: 'Event 2',
-    type: 'event',
-    shortName: 'event_2',
-    phoneNumber: '+19164263342',
+    name: 'Business One',
+    shortCode: 'business_one',
     state: true,
-    votingOptions: [{
-      name: 'no', // Name of vote option to display
-    },
-    {
-      name: 'yes', // Name of vote option to display
-    }]
   },
   unique: {
-    name: getUniqueStringOrNum('Event '),
-    type: 'event',
-    shortName: getUniqueStringOrNum('event_'),
-    phoneNumber: getUniqueStringOrNum(),
+    name: getUniqueStringOrNum('Business '),
+    shortCode: getUniqueStringOrNum('business_'),
     state: true,
-    votingOptions: [{
-      name: 'no', // Name of vote option to display
-    },
-    {
-      name: 'yes', // Name of vote option to display
-    }]
   }
 
 };
