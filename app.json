@@ -1,7 +1,0 @@
-{
-  "name": "Negocio Local",
-  "description": "Negocio Local Responder",
-  //"repository": "https://github.com/heroku/node-js-sample",
-  //"logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
-}

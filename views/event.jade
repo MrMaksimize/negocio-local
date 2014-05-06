@@ -1,0 +1,7 @@
+extends layout
+
+block content
+
+  h1.page-title.event-title(data-event="#{eventObject.shortName}") #{eventObject.name}
+  #chart(style="min-width: 400px; height: 500px; margin: 0 auto")
+
