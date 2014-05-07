@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+  form(method='POST')
+    legend #{title}
+    input(type='hidden', name='_csrf', value=_csrf)
+    div.col-sm-8.col-sm-offset-2
+      != formHTML

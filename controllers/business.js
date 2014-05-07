@@ -1,6 +1,5 @@
 var Business = require('../models/Business');
 var SMS = require('../models/SMS');
-
 var routes = {};
 var methods = {};
 
@@ -28,6 +27,14 @@ routes.getBiz = function(req, res) {
     });
   });
 }
+
+routes.bizNew = function(req, res) {
+  var form = Business.createForm({ toHTML: true });
+  res.render('biz/create', {
+    title: 'Create a Business',
+    formHTML: form
+  });
+};
 
 /*********** Methods **********/
 

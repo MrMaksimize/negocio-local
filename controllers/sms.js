@@ -23,14 +23,13 @@ var receiveSMS = function(req, res, next) {
     fromNum = ('+1' + Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).substring(0, 12);
   }
   // Create A Stub Vote.
-  var vote = new Vote({
-    voterPhoneNumber: fromNum,
-    eventPhoneNumber: req.body.To,
-    voteBody: req.body.Body
+  var sms = new SMS({
+    senderPhoneNumber: fromNum,
+    body: req.body.Body
   });
 
   // Save it and let the model middlware populate what we don't know.
-  vote.save(function(err, savedVote) {
+  sms.save(function(err, savedSMS) {
     console.log('Saving Done');
     console.log('VOTE');
     console.log(savedVote);

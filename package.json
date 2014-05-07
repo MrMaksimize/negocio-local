@@ -59,7 +59,9 @@
     "twit": "^1.1.13",
     "uglify-js": "^2.4.12",
     "underscore": "^1.6.0",
-    "validator": "^3.9.0"
+    "validator": "^3.9.0",
+    "forms": "~0.6.0",
+    "forms-mongoose": "0.0.6"
   },
   "devDependencies": {
     "mocha": "^1.18.2",

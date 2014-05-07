@@ -19,8 +19,10 @@ function convert_mongoose_field(mongoose_field) {
 
 function get_field(path, form_name, form_category) {
   var _field = null;
-  if (!(path.options && path.options.forms))
+  if (_.isEmpty(path.options) || _.isEmpty(path.options.forms)) {
     return null;
+  }
+
   var forms = path.options.forms;
   if (! (
     forms[form_name] ||
@@ -28,8 +30,9 @@ function get_field(path, form_name, form_category) {
     (forms[form_category] && forms[form_category].all) ||
     (forms[form_category] && forms[form_category][form_name]) ||
     (form_name === '*' && forms._all)
-  ))
+  )) {
     return null;
+  }
 
   var _options = _.extend(
       {}
@@ -105,15 +108,12 @@ module.exports.create = function (model, extra_params, form_name, form_category)
     , virtuals = schema.virtuals
     , params = {};
   for (var pathName in paths) {
-    console.log('PATHANEM: ' + pathName);
     var path = paths[pathName];
-    console.log('PATH');
-    console.log(path);
     var field = get_field(path, form_name, form_category);
-    console.log('FIELd');
-    console.log(field);
-    if (field)
+
+    if (field) {
       params = _.extend(params, field);
+    }
   }
   for (var virtName in virtuals) {
     var virt = virtuals[virtName];
