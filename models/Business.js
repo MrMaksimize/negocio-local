@@ -12,6 +12,7 @@ var schemaForms = {
   'location.state': { all: { label: 'State', } },
   'location.zip': { all: { label: 'Zip Code', } },
   'location.muni': { all: { label: 'Municipality', } },
+  'reply': { all: {label: 'Reply To Texter', widget:forms.widgets.textarea({rows:3})}},
 };
 
 var bizSchema = new mongoose.Schema({
@@ -25,7 +26,8 @@ var bizSchema = new mongoose.Schema({
     state : { type: String, default: '' },
     zip   : { type: String, default: '' },
     muni  : { type: String, default: '' },
-  }
+  },
+  reply: {type: String, required: true},
 });
 
 bizSchema.eachPath(function(pathName){

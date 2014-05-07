@@ -44,7 +44,8 @@ routes.bizNewFormPost = function(req, res) {
 
   var business = new Business({
     name: req.body.name,
-    shortCode: req.body.shortCode
+    shortCode: req.body.shortCode,
+    reply: req.body.reply
   });
 
   business.save(function(err, savedBiz){

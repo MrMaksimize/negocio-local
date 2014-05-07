@@ -1,4 +1,5 @@
 var twiliosig = require('twiliosig');
+var twilio = require('twilio');
 
 var Business = require('../models/Business');
 var SMS = require('../models/SMS');
@@ -30,16 +31,17 @@ var receiveSMS = function(req, res, next) {
 
   // Save it and let the model middlware populate what we don't know.
   sms.save(function(err, savedSMS) {
-    console.log('Saving Done');
-    console.log('VOTE');
-    console.log(savedVote);
     if (err) {
       console.log(err);
-      return res.send(503, err.message);
+      return res.json(503, err.message);
     }
-    io.sockets.in(savedVote.eventShortName).emit('vote', savedVote);
-    return res.send(savedVote);
-
+    var resp = new twilio.TwimlResponse();
+    res.set('Content-Type', 'text/xml');
+    resp.message({
+      to: fromNum,
+      from: process.env.TWILIO_NUMBER,
+    }, savedSMS.sentReply);
+    return res.send(resp.toString());
   });
 };
 
