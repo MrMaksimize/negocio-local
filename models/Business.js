@@ -15,7 +15,6 @@ var schemaForms = {
 };
 
 var bizSchema = new mongoose.Schema({
-  _id: { type: String, unique:true, lowercase: true },
   name: {type: String, required: true },
   shortCode: { type: String, unique: true, lowercase: true, index: true },
   state: Boolean,
@@ -35,7 +34,7 @@ bizSchema.eachPath(function(pathName){
 });
 
 bizSchema.pre('save', function(next) {
-  this._id = this.shortName;
+  console.log('presave');
   return next();
 });
 
@@ -51,12 +50,18 @@ bizSchema.statics.createForm = function(options) {
   }
   // @todo account for edit conditions later.
   return settings.toHTML ? form.toHTML(formRender.bootstrap_field) : form;
-}
+};
+
+bizSchema.methods.getURL = function() {
+  return '/businesses/' + this.shortCode;
+};
 
 if (process.env.NODE_ENV == 'production') {
   bizSchema.set('autoIndex', false);
 }
 
 var bizModel = mongoose.model('Business', bizSchema);
+
+
 
 module.exports = bizModel;

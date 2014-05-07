@@ -122,7 +122,8 @@ app.use(function(req, res, next) {
 // TODO http://scotch.io/bar-talk/expressjs-4-0-new-features-and-upgrading-from-3-0
 app.get('/', homeController.index);
 app.get('/businesses', bizController.routes.index);
-app.get('/businesses/new', bizController.routes.bizNew);
+app.get('/businesses/new', bizController.routes.bizNewForm);
+app.post('/businesses/new', bizController.routes.bizNewFormPost);
 app.get('/businesses/:bizshort', bizController.routes.getBiz);
 
 // Stock

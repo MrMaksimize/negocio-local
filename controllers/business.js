@@ -28,12 +28,38 @@ routes.getBiz = function(req, res) {
   });
 }
 
-routes.bizNew = function(req, res) {
+routes.bizNewForm = function(req, res) {
   var form = Business.createForm({ toHTML: true });
   res.render('biz/create', {
     title: 'Create a Business',
     formHTML: form
   });
+};
+
+routes.bizNewFormPost = function(req, res) {
+  console.log(req.body);
+  req.assert('name', 'Name cannot be blank').notEmpty();
+
+  var errors = req.validationErrors();
+  console.log(errors);
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/businesses/new');
+  }
+
+  var business = new Business({
+    name: req.body.name,
+    shortCode: req.body.shortCode
+  });
+
+  business.save(function(err, savedBiz){
+    if (err) {
+      console.log(err);
+      return res.redirect('/businesses/new');
+    }
+    res.redirect(savedBiz.getURL());
+  });
+
 };
 
 /*********** Methods **********/
