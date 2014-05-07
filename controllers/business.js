@@ -14,17 +14,12 @@ routes.index = function(req, res) {
 };
 
 routes.getBiz = function(req, res) {
-  var event_short = req.params.eventshort;
-  Event.findOne({ shortName: event_short }).lean().exec(function(err, eventObject){
+  var bizShortCode = req.params.bizshort;
+  Business.findOne({ shortCode: bizShortCode}).lean().exec(function(err, bizObject){
     // Use Map Reduce here to get vote counts per option.
     var renderObject = {};
-    renderObject.eventObject = eventObject;
-    Vote.getVoteCountsForEvent(eventObject.shortName).exec(function(err, result){
-      if (err) console.log(err);
-      console.log(result);
-      renderObject.voteResults = result;
-      res.render('event', renderObject);
-    });
+    renderObject.bizObject = bizObject;
+    res.render('biz/view_single', renderObject);
   });
 }
 
